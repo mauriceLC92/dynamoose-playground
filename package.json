@@ -1,0 +1,26 @@
+{
+  "name": "dynamoose-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "dynamo": "docker run -d -p 8000:8000 amazon/dynamodb-local",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "=14.20.0",
+    "npm": "=8.13.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.6.1",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1182.0",
+    "dotenv": "^16.0.1",
+    "dynamoose": "^2.8.6"
+  }
+}
