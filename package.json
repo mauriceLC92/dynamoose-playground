@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node src/hello-world/hello-world.dynamoose.ts",
     "dynamo": "docker run -d -p 8000:8000 amazon/dynamodb-local",
+    "admin": "dynamodb-admin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
