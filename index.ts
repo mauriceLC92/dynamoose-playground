@@ -5,7 +5,7 @@ import {
   gamePlayer,
   gamePlayerSchemeInfo
 } from './src/game-sessions/game-sessions';
-// import { schemeInfo } from './src/hello-world/hello-world';
+import { helloWorldSchemeInfo } from './src/hello-world/hello-world';
 
 const sdk = dynamoose.aws.sdk;
 
@@ -19,7 +19,7 @@ dynamoose.logger.providers.add(console);
 const schemas: {
   schemaName: string;
   schema: Schema;
-}[] = [gamePlayerSchemeInfo];
+}[] = [gamePlayerSchemeInfo, helloWorldSchemeInfo];
 
 const init = async () => {
   schemas.forEach((schema) => {
