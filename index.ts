@@ -1,25 +1,39 @@
 import * as dynamoose from 'dynamoose';
-import DynamoDB from 'aws-sdk/clients/dynamodb';
+import { Schema } from 'dynamoose/dist/Schema';
+import {
+  gameData,
+  gamePlayer,
+  gamePlayerSchemeInfo
+} from './src/game-sessions/game-sessions';
+// import { schemeInfo } from './src/hello-world/hello-world';
 
+const sdk = dynamoose.aws.sdk;
+
+sdk.config.update({
+  region: 'us-east-1'
+});
+
+dynamoose.aws.ddb.local();
 dynamoose.logger.providers.add(console);
 
-// Check out this gist: https://gist.github.com/brandongoode/ab22d81e8e13387048217d08804d15e0
+const schemas: {
+  schemaName: string;
+  schema: Schema;
+}[] = [gamePlayerSchemeInfo];
 
-// const filter = new dynamoose.Condition()
-//   .where('PK')
-//   .eq('test@test.com')
-//   .filter('SK')
-//   .beginsWith('MY_');
+const init = async () => {
+  schemas.forEach((schema) => {
+    dynamoose.model(`${schema.schemaName}`, schema.schema, {
+      create: true,
+      waitForActive: true
+    });
+  });
+};
 
-//   try {
-//     const res = await state
-//       .MultisigDB()
-//       .query('creatorId')
-//       .eq(creatorId)
-
-//       .filter('status')
-//       .eq(status)
-//       .using('creatorIdIndex')
-//       // .query({ creatorId, status })
-//       // .using('creatorIdIndex')
-//       .exec();
+init().then(async () => {
+  await Promise.all(
+    gameData.map((player) => {
+      return gamePlayer.create(player);
+    })
+  );
+});

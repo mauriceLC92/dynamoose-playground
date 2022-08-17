@@ -9,6 +9,8 @@
 - https://dynamoosejs.com/getting_started/Introduction
 - https://medium.com/swlh/a-gui-for-local-dynamodb-dynamodb-admin-b16998323f8e
 - https://github.com/dynamoose/dynamoose/issues/606
+- https://gist.github.com/brandongoode/ab22d81e8e13387048217d08804d15e0
+- https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/
 
 
 ## Strategies

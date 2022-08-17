@@ -1,23 +1,15 @@
-import * as dynamoose from 'dynamoose';
-import { Document } from 'dynamoose/dist/Document';
+// import * as dynamoose from 'dynamoose';
+// import { Document } from 'dynamoose/dist/Document';
 import { Schema, SchemaDefinition } from 'dynamoose/dist/Schema';
-const sdk = dynamoose.aws.sdk;
-
-sdk.config.update({
-  region: 'us-east-1'
-});
-
-dynamoose.aws.ddb.local();
-dynamoose.logger.providers.add(console);
 
 export const GREETING_TYPE = ['friendly', 'aggressive', 'passive'];
 
-interface HelloWorldDocument extends Document {
-  id: string;
-  userId: string;
-  greetingType: string;
-  greeting: string;
-}
+// interface HelloWorldDocument extends Document {
+//   id: string;
+//   userId: string;
+//   greetingType: string;
+//   greeting: string;
+// }
 
 export const helloWorldSchema: Schema = new Schema(
   <SchemaDefinition>{
@@ -50,18 +42,23 @@ export const helloWorldSchema: Schema = new Schema(
   }
 );
 
-const helloWorld = dynamoose.model<HelloWorldDocument>(
-  'helloWorld',
-  helloWorldSchema,
-  {
-    create: true,
-    waitForActive: true
-  }
-);
+export const schemeInfo = {
+  schemaName: 'helloWorld',
+  schema: helloWorldSchema
+};
 
-helloWorld.create({
-  id: '123234',
-  userId: '123456',
-  greetingType: 'friendly',
-  greeting: 'welcome sir'
-});
+// const helloWorld = dynamoose.model<HelloWorldDocument>(
+//   'helloWorld',
+//   helloWorldSchema,
+//   {
+//     create: true,
+//     waitForActive: true
+//   }
+// );
+
+// helloWorld.create({
+//   id: '123234',
+//   userId: '123456',
+//   greetingType: 'friendly',
+//   greeting: 'welcome sir'
+// });
