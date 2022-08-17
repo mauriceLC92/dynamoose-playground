@@ -33,7 +33,14 @@ export const exampleSchema: Schema = new Schema(
   }
 );
 
-dynamoose.model<ExampleDocument>('exampleSchema', exampleSchema, {
+const schemaName = 'exampleSchema';
+
+export const exampleSchemeInfo = {
+  schemaName: schemaName,
+  schema: exampleSchema
+};
+
+dynamoose.model<ExampleDocument>(schemaName, exampleSchema, {
   create: true,
   waitForActive: true
 });

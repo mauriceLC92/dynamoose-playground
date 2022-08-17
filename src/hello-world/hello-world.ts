@@ -43,7 +43,7 @@ export const helloWorldSchema: Schema = new Schema(
 );
 
 export const helloWorldSchemeInfo = {
-  schemaName: 'helloWorld',
+  schemaName: 'helloWorldSchema',
   schema: helloWorldSchema
 };
 

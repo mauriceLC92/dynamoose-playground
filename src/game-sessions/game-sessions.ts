@@ -1,13 +1,13 @@
-import * as dynamoose from 'dynamoose';
-import { Document } from 'dynamoose/dist/Document';
+// import * as dynamoose from 'dynamoose';
+// import { Document } from 'dynamoose/dist/Document';
 import { Schema, SchemaDefinition } from 'dynamoose/dist/Schema';
 
-interface GamePlayersDocument extends Document {
-  Opponent: string;
-  StatusDate: string;
-  GameId: string;
-  Host: string;
-}
+// interface GamePlayersDocument extends Document {
+//   Opponent: string;
+//   StatusDate: string;
+//   GameId: string;
+//   Host: string;
+// }
 
 export const gamePlayerSchema: Schema = new Schema(
   <SchemaDefinition>{
@@ -36,19 +36,21 @@ export const gamePlayerSchema: Schema = new Schema(
   }
 );
 
-export const gamePlayer = dynamoose.model<GamePlayersDocument>(
-  'gamePlayerSchema',
-  gamePlayerSchema,
-  {
-    create: true,
-    waitForActive: true
-  }
-);
+const schemaName = 'gamePlayerSchema';
 
-export const gamePlayerSchemeInfo = {
-  schemaName: 'gamePlayerSchema',
+export const gameSessionSchemeInfo = {
+  schemaName: schemaName,
   schema: gamePlayerSchema
 };
+
+// export const gamePlayerModel = dynamoose.model<GamePlayersDocument>(
+//   schemaName,
+//   gamePlayerSchema,
+//   {
+//     create: false,
+//     waitForActive: true
+//   }
+// );
 
 export const gameData = [
   {
@@ -82,3 +84,15 @@ export const gameData = [
     Host: 'Carol'
   }
 ];
+
+export const createGameSessionData = async (gameSessionModel) => {
+  try {
+    await Promise.all(
+      gameData.map((player) => {
+        return gameSessionModel.create(player);
+      })
+    );
+  } catch (err) {
+    console.error('err', err);
+  }
+};
